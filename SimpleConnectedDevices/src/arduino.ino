@@ -1,3 +1,5 @@
+
+//This is a sample code from internet to implement the neopixel 
 #include <Adafruit_NeoPixel.h>
 #ifdef __AVR__
   #include <avr/power.h>
