@@ -74,7 +74,7 @@ webSocket.on('connect', (socket) => {
 	console.log('Web server socket: Client connected');
 
   socket.on('redLEDOn', () => {
-		console.log('red LED on');
+		console.log('HAPPY');
 		newLEDState[0] = 0;  // Red is LED number 0
 		newLEDState[1] = 1; // turn on the LED
     // Send the message to Arduino
@@ -87,7 +87,7 @@ webSocket.on('connect', (socket) => {
   });
 
   socket.on('redLEDOff', () => {
-		console.log('red LED off');
+		console.log('SAD');
 		newLEDState[0] = 0;  // Red is LED number 0
 		newLEDState[1] = 0; // turn off the LED
     // Send the message to Arduino
@@ -100,7 +100,7 @@ webSocket.on('connect', (socket) => {
   });
 
   socket.on('greenLEDOn', () => {
-		console.log('green LED on');
+		console.log('ANGRY');
 		newLEDState[0] = 1;  // green is LED number 1
 		newLEDState[1] = 1; // turn on the LED
     // Send the message to Arduino
@@ -113,7 +113,7 @@ webSocket.on('connect', (socket) => {
   });
 
   socket.on('greenLEDOff', () => {
-		console.log('green LED off');
+		console.log('EXCITED');
 		newLEDState[0] = 1;  // green is LED number 1
 		newLEDState[1] = 0; // turn off the LED
     // Send the message to Arduino
@@ -126,7 +126,7 @@ webSocket.on('connect', (socket) => {
   });
 
   socket.on('blueLEDOn', () => {
-		console.log('blue LED on');
+		console.log('STRESSED');
 		newLEDState[0] = 2;  // blue is LED number 2
 		newLEDState[1] = 1; // turn on the LED
     // Send the message to Arduino
@@ -139,7 +139,7 @@ webSocket.on('connect', (socket) => {
   });
 
   socket.on('blueLEDOff', () => {
-		console.log('blue LED off');
+		console.log('SCARED');
 		newLEDState[0] = 2;  // blue is LED number 2
 		newLEDState[1] = 0; // turn off the LED
     // Send the message to Arduino
