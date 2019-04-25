@@ -13,8 +13,8 @@ Sociocultural: Stakeholder will want a product that will make them profit. That 
 
 Interview questions:
 
-What product do you use to write notes in your daily routine?
-How frequently do you use the Net-book service?
-Draw a spatial map of your usage of notebooks.
+1.What product do you use to write notes in your daily routine?
+2.How frequently do you use the Net-book service?
+3.Draw a spatial map of your usage of notebooks.
 
 We will make it using generative methods by involving non-designers in the process. We will organize events where we call students and other potential users and ask them to brainstorm ideas for what their ideal product would look like. Based on this, we will find out the direction to pursue 
