@@ -4,10 +4,8 @@ Linked:
 The six degree of separation is an interesting concept. It made me question if there ever exist things that have no relation on earth. Because as shown in the book, it does not take many links to reach a huge number of friends or pages with in a network. Thus, the concept makes our world a small village or as Albert calls it “small worlds”.  I am convinced with his new way of looking at things that seem unrelated due to the network effect. 
 
 
-Homework 2
+Notes from Making things talk:
 
-
-Making things talk:
 Modems, hubs, switches, and routers are common Connectors.  
 A modem is a device that converts one type of signal into another, and connects one object to one other object. Example: DSL modem;  It takes the digital data from my home computer or network, converts it to a signal that can be carried across the phone line or cable line, and connects to another modem on the other end of the line.  
 A hub is a device that multiplexes data signals from several devices and passes them upstream to the rest of the network. 
