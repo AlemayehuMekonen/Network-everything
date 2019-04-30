@@ -13,5 +13,7 @@ May use node.js
 
 May require other programs
 
-Using MKR Arduino 
+Using MKR Arduino and raspberry
+
+Vibration Motor
 
