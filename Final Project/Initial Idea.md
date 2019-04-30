@@ -10,5 +10,5 @@ May use node.js
 
 May require other programs
 
-Using Arduino 
+Using MKR Arduino 
 
