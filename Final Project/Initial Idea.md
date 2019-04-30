@@ -1,12 +1,14 @@
  Theme of the year: "A place where the virtual/game world intersects with the real/actual world"
  
-Idea: A Robot arm that is controlled by a Virtual reality
+Idea: A web based Robot arm game that interacts with real body hand glove. 
 
-It mimicks body arm movement
+Sends A signal to the fingers
 
-May use server.js
+Play music with the finger tips
+
+May use node.js
 
 May require other programs
 
-Using Arduino and raspberry pi
+Using Arduino 
 
