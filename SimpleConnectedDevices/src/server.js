@@ -8,7 +8,7 @@ var dgram = require('dgram');
 var arduinoUDPServer = dgram.createSocket('udp4')
 var MY_PORT_FOR_ARDUINO = 7000;
 var ARDUINO_PORT_FOR_ME= 5000;
-var ARDUINO_IP_ADDRESS = '192.168.1.37'; 
+var ARDUINO_IP_ADDRESS = '192.168.1.9'; 
 
 /* HTTP server talks to browser */
 const http = require('http')
@@ -33,15 +33,26 @@ function ArduinoUDPServerIsListening() {
 function ArduinoUDPServerReceivedMessage(message, sender) {
 
 	// If the message is a byte we need to read a byte
-	if (message.readUInt8(0) == 0 ) {
-		console.log( "received a 0");
-		// Now send a message to the web browser to change color
-		webSocket.emit('buttonReleased', 99);
-	}
 
 	if (message.readUInt8(0) == 1 ) {
 		console.log( "received a 1");
-		webSocket.emit('buttonPressed', 19);
+		webSocket.emit('greenbutton', 1);
+	}
+
+	if (message.readUInt8(1) == 1 ) {
+		console.log( "received a 1");
+		webSocket.emit('bluebutton', 2);
+	}
+
+	if (message.readUInt8(2) == 1 ) {
+		console.log( "received a 1");
+		webSocket.emit('yellowbutton', 3);
+	}
+
+	if (message.readUInt8(0) == 0 && message.readUInt8(1) == 0 && message.readUInt8(2) == 0 ) {
+		console.log( "all are off");
+		// Now send a message to the web browser to change color
+		webSocket.emit('LEDS are off', 0);
 	}
 }
 
