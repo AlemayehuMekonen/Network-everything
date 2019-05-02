@@ -1,13 +1,36 @@
+/*
 
-//This is a sample code from internet to implement the neopixel 
+  WiFi UDP device responding to buttons on a web page 
+  sent from a web page to node.js client to node.js server
+  and finally to here
+
+
+  Michael Shiloh 
+  and
+  Alemayehu Abebe
+
+*/
+
+#include <WiFiNINA.h>
+#include <WiFiUdp.h>
 #include <Adafruit_NeoPixel.h>
+int status = WL_IDLE_STATUS;
+#include "arduino_secrets.h"
+///////please enter your sensitive data in the Secret tab/arduino_secrets.h
+char ssid[] = SECRET_SSID;        // your network SSID (name)
+char pass[] = SECRET_PASS;    // your network password (use for WPA, or use as key for WEP)
+int keyIndex = 0;            // your network key Index number (needed only for WEP)
+
+//
+//This is a sample code from internet to implement the neopixel 
+
 #ifdef __AVR__
   #include <avr/power.h>
 #endif
 
 #define PIN 6
 
-#define NUM_LEDS 60
+#define NUM_LEDS 9
 
 #define BRIGHTNESS 50
 
@@ -31,8 +54,49 @@ byte neopix_gamma[] = {
   177,180,182,184,186,189,191,193,196,198,200,203,205,208,210,213,
   215,218,220,223,225,228,231,233,236,239,241,244,247,249,252,255 };
 
+unsigned int myPort = 5000;      // local port to listen on
+unsigned int remoteServerPort = 7000;  // remote port to talk to
+// IPAddress remoteServerAddress(192, 168, 1, 5); // server at home
+IPAddress remoteServerAddress(192, 168, 1, 8); // server on x1 laptop
+
+char packetBuffer[255]; //buffer to hold incoming packet
+
+WiFiUDP Udp;
+
+// Sensors
+const int BUTTON_PIN = 0;
+
+
+// Actuators
+const int NUMBER_OF_ACTUATORS = 3;
+int actuators[NUMBER_OF_ACTUATORS] = {
+  3, // pin numbers
+  4,
+  5
+};
+const int GREEN_PIN = 0; // transmitting
+const int YELLOW_PIN = 1;
+const int BLUE_PIN = 2;
+
+
+// remember the button state so we only send
+// when the state changes
+boolean buttonStategreen;
+boolean buttonStateblue;
+boolean buttonStateyellow;
+boolean lastButtonStategreen = LOW; // arbitrary
+boolean lastButtonStateblue = LOW;
+boolean lastButtonStateyellow = LOW;
+
+String LED_ON_MESSAGE = "ledON";
+String LED_OFF_MESSAGE = "ledOFF";
+
+// remember the button state so we only send
+// when the state changes
 
 void setup() {
+
+  
   // This is for Trinket 5V 16MHz, you can remove these three lines if you are not using a Trinket
   #if defined (__AVR_ATtiny85__)
     if (F_CPU == 16000000) clock_prescale_set(clock_div_1);
@@ -41,33 +105,135 @@ void setup() {
   strip.setBrightness(BRIGHTNESS);
   strip.begin();
   strip.show(); // Initialize all pixels to 'off'
+
+
+  
+  // Set all actuator pins as outputs
+  for (int i = 0; i < NUMBER_OF_ACTUATORS; i++ ) {
+    pinMode(actuators[i], OUTPUT);
+  }
+  
+  //Initialize serial
+  Serial.begin(9600);
+  // wait for serial port to connect. Needed for native USB port only
+  // Remove this if running without a serial monitor
+  while (!Serial) {
+    ; 
+  }
+
+  // attempt to connect to WiFi network:
+  while ( status != WL_CONNECTED) {
+    Serial.print("Attempting to connect to SSID: ");
+    Serial.println(ssid);
+    // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
+    status = WiFi.begin(ssid, pass);
+
+    // wait 10 seconds for connection:
+    delay(10000);
+  }
+  Serial.println("Connected to wifi");
+  printWiFiStatus();
+
+  Serial.print("Initializing WiFiUDP library and listening on port ");
+  Serial.println(myPort);
+  Udp.begin(myPort);
 }
 
 void loop() {
-  // Some example procedures showing how to display to the pixels:
-  colorWipe(strip.Color(255, 0, 0), 50); // Red
-  colorWipe(strip.Color(0, 255, 0), 50); // Green
-  colorWipe(strip.Color(0, 0, 255), 50); // Blue
-  colorWipe(strip.Color(0, 0, 0, 255), 50); // White
+  
+  // It's polite to listen first
+  // Did the server send us anything?
+  int packetSize = Udp.parsePacket(); 
+  if (packetSize)
+  {
+    Serial.print("Received packet of size ");
+    Serial.print(packetSize);
+    Serial.print(" from address ");
+    IPAddress remoteIp = Udp.remoteIP();
+    Serial.print(remoteIp);
+    Serial.print(", port ");
+    Serial.println(Udp.remotePort());
 
-  whiteOverRainbow(20,75,5);  
+    // read the packet into packetBufffer
+    int len = Udp.read(packetBuffer, 255);
 
-  pulseWhite(5); 
+    // Activate the actuators as requested
 
-  // fullWhite();
-  // delay(2000);
+    if (packetBuffer[0]== 0)
+    {
+      if (packetBuffer[1]==0)  
+        //fullWhite();
+        colorWipe(strip.Color(255, 0, 0), 50); // Red
+      else if (packetBuffer[1]==1)
+        rainbowFade2White(3, 3, 1);
+    }
+    
+    if (packetBuffer[0]== 1)
+    {
+      if (packetBuffer[1]==0)  
+        colorWipe(strip.Color(0, 255, 0), 50); // Green
+        //fullWhite();
+      else if (packetBuffer[1]==1)
+        whiteOverRainbow(20, 75, 5);
+    }
+    
+    if (packetBuffer[0]== 2)
+    {
+      if (packetBuffer[1]==0)  
+        colorWipe(strip.Color(0, 0, 255), 50); // Blue
+        //fullWhite();
+      else if (packetBuffer[1]==1)
+        pulseWhite(5);
+    }
+    
+    digitalWrite( 
+      actuators[(int)packetBuffer[0]],  // first byte is actuator number
+      (int)packetBuffer[1]);            // second byte is value
+  }
 
-  rainbowFade2White(3,3,1);
+  buttonStategreen = digitalRead(GREEN_PIN);
+  buttonStateblue = digitalRead(BLUE_PIN);
+  buttonStateyellow = digitalRead(YELLOW_PIN);
 
+  if (buttonStategreen != lastButtonStategreen ||buttonStateyellow != lastButtonStateyellow||buttonStateblue != lastButtonStateblue) {
 
+    Serial.println("button state changed; sending new state");
+    Udp.beginPacket(remoteServerAddress, remoteServerPort);
+    Udp.write(buttonStategreen);
+    Udp.write(buttonStateyellow);
+    Udp.write(buttonStateblue);
+    Udp.endPacket();
+
+    lastButtonStategreen = buttonStategreen;
+    lastButtonStateblue = buttonStateblue;
+    lastButtonStateyellow = buttonStateyellow;
+    
+  }
 }
 
-// Fill the dots one after the other with a color
+void printWiFiStatus() {
+  // print the SSID of the network you're attached to:
+  Serial.print("SSID: ");
+  Serial.println(WiFi.SSID());
+
+  // print your WiFi shield's IP address:
+  IPAddress ip = WiFi.localIP();
+  Serial.print("My IP Address: ");
+  Serial.println(ip);
+
+  // print the received signal strength:
+  long rssi = WiFi.RSSI();
+  Serial.print("signal strength (RSSI):");
+  Serial.print(rssi);
+  Serial.println(" dBm");
+}
+
+
 void colorWipe(uint32_t c, uint8_t wait) {
   for(uint16_t i=0; i<strip.numPixels(); i++) {
     strip.setPixelColor(i, c);
     strip.show();
-    delay(wait);
+    //delay(wait);
   }
 }
 
@@ -76,7 +242,7 @@ void pulseWhite(uint8_t wait) {
       for(uint16_t i=0; i<strip.numPixels(); i++) {
           strip.setPixelColor(i, strip.Color(0,0,0, neopix_gamma[j] ) );
         }
-        delay(wait);
+        //delay(wait);
         strip.show();
       }
 
@@ -84,7 +250,7 @@ void pulseWhite(uint8_t wait) {
       for(uint16_t i=0; i<strip.numPixels(); i++) {
           strip.setPixelColor(i, strip.Color(0,0,0, neopix_gamma[j] ) );
         }
-        delay(wait);
+        //delay(wait);
         strip.show();
       }
 }
@@ -123,14 +289,14 @@ void rainbowFade2White(uint8_t wait, int rainbowLoops, int whiteLoops) {
       }
 
         strip.show();
-        delay(wait);
+        //delay(wait);
     }
   
   }
 
 
 
-  delay(500);
+  //delay(500);
 
 
   for(int k = 0 ; k < whiteLoops ; k ++){
@@ -143,7 +309,7 @@ void rainbowFade2White(uint8_t wait, int rainbowLoops, int whiteLoops) {
           strip.show();
         }
 
-        delay(2000);
+        //delay(2000);
     for(int j = 255; j >= 0 ; j--){
 
         for(uint16_t i=0; i < strip.numPixels(); i++) {
@@ -153,7 +319,7 @@ void rainbowFade2White(uint8_t wait, int rainbowLoops, int whiteLoops) {
         }
   }
 
-  delay(500);
+  //delay(500);
 
 
 }
@@ -220,7 +386,7 @@ void rainbowCycle(uint8_t wait) {
       strip.setPixelColor(i, Wheel(((i * 256 / strip.numPixels()) + j) & 255));
     }
     strip.show();
-    delay(wait);
+    //delay(wait);
   }
 }
 
@@ -232,7 +398,7 @@ void rainbow(uint8_t wait) {
       strip.setPixelColor(i, Wheel((i+j) & 255));
     }
     strip.show();
-    delay(wait);
+    //delay(wait);
   }
 }
 
