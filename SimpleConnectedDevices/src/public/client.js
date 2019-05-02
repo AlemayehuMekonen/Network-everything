@@ -1,31 +1,67 @@
 /* 
 This is the websocket library which will allow us to send messages
 back to the web server 
+Alemayehu Abebe
 */
 var socket = io();
 
-socket.on('event', (data) => {
+socket.on('greenbutton', (data) => {
 	console.log('received data from webserver: ' + data);
+	image1();
 });
 
-socket.on('buttonPressed', (data) => {
+socket.on('bluebotton', (data) => {
 	console.log('received button pressed event from webserver: ' + data);
-	displayTheImage();
+	image2();
 });
 
-socket.on('buttonReleased', (data) => {
+socket.on('yellowbutton', (data) => {
+	console.log('received button released from webserver: ' + data);
+	image3();
+});
+
+socket.on('off', (data) => {
 	console.log('received button released from webserver: ' + data);
 	hideTheImage();
 });
+function image1 () {
 
-function displayTheImage () {
+	var audio = document.getElementById("audio");
+
 	var placeholder = document.getElementById("placeholder");
 
-	placeholder.src = "randomImage.jpeg"; // put images in public folder
+	placeholder.src = "paradize.jpg"; // put images in public folder
 
 	placeholder.style.opacity = 100;
+
+	audio.play();
 }
 
+
+function image2 () {
+
+	var audio = document.getElementById("audio");
+
+	var placeholder = document.getElementById("placeholder");
+
+	placeholder.src = "sadrelief.jpg"; // put images in public folder
+
+	placeholder.style.opacity = 100;
+
+	audio.play();
+}
+
+function image3 () {
+
+	var audio = document.getElementById("audio");
+
+	var placeholder = document.getElementById("placeholder");
+
+	placeholder.src = "stressrelief.jpg"; // put images in public folder
+
+	placeholder.style.opacity = 100;
+	audio.play();
+}
 function hideTheImage () {
 	var placeholder = document.getElementById("placeholder");
 
