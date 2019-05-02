@@ -6,15 +6,20 @@
 		<<script src="/socket.io/socket.io.js"></script>
 		<script src="client.js"></script>
 	</head>
-	<body bgcolor="#003366"
-	      >
+	<body background="green.jpg">
+
+		<img id="placeholder" width="500" height="800">
+		<audio id = "audio">
+		<source src = "tadow.mp3" type ="audio/mp3">
+		</audio>
+
 		<table style="width:100%; max-width: 500px; height:300px;">
 			<tr>
 				<td>
-					<button onclick="redLEDOn()">I AM HAPPY</button>
+					<button onclick="redLEDOn()">I AM SAD</button>
 				</td>
 				<td>
-					<button onclick="redLEDOff()">I AM SAD</button>
+					<button onclick="redLEDOff()">I AM HAPPY</button>
 				</td>
 			</tr>
 			<tr>
@@ -30,15 +35,7 @@
 					<button onclick="blueLEDOn()">I AM STRESSED</button>
 				</td>
 				<td>
-					<button onclick="blueLEDOff()">I AM SCARED</button>
-				</td>
-			</tr>
-			<img src="green.jpg" alt="Flowers in Chania">
-		</table>
-		<table>
-			<tr>
-				<td>
-					<img id="placeholder">
+					<button onclick="blueLEDOff()">I AM RELAXED</button>
 				</td>
 			</tr>
 		</table>
