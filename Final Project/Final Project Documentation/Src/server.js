@@ -1,6 +1,7 @@
 /*
 	UDP And HTTP Server
 	By Alemayehu Abebe
+  A Handglove to Feel Fire with an Immersive Bushfire Experience 
 */
 
 /* UDP server talks to Arduino */
