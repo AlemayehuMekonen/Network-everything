@@ -4,15 +4,7 @@
   sent from a web page to node.js client to node.js server
   and finally to here
 
-  code is at:
-  https://github.com/michaelshiloh/resourcesForClasses/tree/master/src/nodePrograms/udpAndHttpServer
-
-  created 3 February 2019
-  by Michael Shiloh
-
-  Change log:
-  14 Mar 2019 - ms -  better comments and cleaned up code
-                      Send binary data between Arduino and server
+  Alemayehu Abebe
 
 */
 
