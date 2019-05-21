@@ -23,6 +23,14 @@ Final Project
 
 People love to sense fire without hurting themselves. I believe that fire represents an expression of deep internal curiosity. No one wants to burn themselves however we would like to feel fire. Therefore, I used a web browser based game that uses a combination of immersive fire crackling sound, Neopixel and vibration motor integrated on a hand glove. Users have a choice to either be in a visual bush fire or escape the fire. When the fire button is activated on the browser, the vibration motors and the neopixel with a red color is activated on the hand glove representing a sudden fire impulse. At the same time, the user can move around and feel the touch of fire by moving the glove closer to the computer screen. Many users expressed getting a positive experience during the IM Showcase. Therefore, the project was a success. 
 
+List of Important Parts
+
+Hand glove
+Vibration motor
+Neopixel
+Arduino MKR1010
+PCB board
+
 ![Alt text](https://github.com/AlemayehuMekonen/Network-everything/blob/master/Final%20Project/Final%20Project%20Documentation/System%20Diagram/Hardware%20Schematics.jpg)
 
 ![Alt text](https://github.com/AlemayehuMekonen/Network-everything/blob/master/Final%20Project/Final%20Project%20Documentation/System%20Diagram/System%20diagram.jpg)
