@@ -26,9 +26,13 @@ People love to sense fire without hurting themselves. I believe that fire repres
 List of Important Parts
 
 Hand glove
+
 Vibration motor
+
 Neopixel
+
 Arduino MKR1010
+
 PCB board
 
 ![Alt text](https://github.com/AlemayehuMekonen/Network-everything/blob/master/Final%20Project/Final%20Project%20Documentation/System%20Diagram/Hardware%20Schematics.jpg)
