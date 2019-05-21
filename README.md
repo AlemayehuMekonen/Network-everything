@@ -35,6 +35,8 @@ Arduino MKR1010
 
 PCB board
 
+Webcamera( Notused) 
+
 ![Alt text](https://github.com/AlemayehuMekonen/Network-everything/blob/master/Final%20Project/Final%20Project%20Documentation/System%20Diagram/Hardware%20Schematics.jpg)
 
 ![Alt text](https://github.com/AlemayehuMekonen/Network-everything/blob/master/Final%20Project/Final%20Project%20Documentation/System%20Diagram/System%20diagram.jpg)
