@@ -16,3 +16,13 @@ A switch is like a hub, but it’s more sophisticated. It keeps track of the add
 Web server is just a program running on a computer somewhere else on the internet. The server provides access to a number of HTML files, images, sound files, and other elements of a website to clients from all over the world.
 A server is a program that provides service to other programs on the internet. The computer that a server runs on is expected to be online and available all times so that the service is not disrupted. 
 The server computer shares its IP address with every server program running on it by assigning each program a port number.
+
+
+Final Project
+
+
+People love to sense fire without hurting themselves. I believe that fire represents an expression of deep internal curiosity. No one wants to burn themselves however we would like to feel fire. Therefore, I used a web browser based game that uses a combination of immersive fire crackling sound, Neopixel and vibration motor integrated on a hand glove. Users have a choice to either be in a visual bush fire or escape the fire. When the fire button is activated on the browser, the vibration motors and the neopixel with a red color is activated on the hand glove representing a sudden fire impulse. At the same time, the user can move around and feel the touch of fire by moving the glove closer to the computer screen. Many users expressed getting a positive experience during the IM Showcase. Therefore, the project was a success. 
+
+![Alt text](https://github.com/AlemayehuMekonen/Network-everything/blob/master/Final%20Project/Final%20Project%20Documentation/System%20Diagram/Hardware%20Schematics.jpg)
+
+
