@@ -26,3 +26,4 @@ People love to sense fire without hurting themselves. I believe that fire repres
 ![Alt text](https://github.com/AlemayehuMekonen/Network-everything/blob/master/Final%20Project/Final%20Project%20Documentation/System%20Diagram/Hardware%20Schematics.jpg)
 
 
+![Alt text](https://github.com/AlemayehuMekonen/Network-everything/tree/master/Final%20Project/Final%20Project%20Documentation/System%20Diagram)
