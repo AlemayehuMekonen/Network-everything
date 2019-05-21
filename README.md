@@ -46,3 +46,5 @@ Webcamera( Notused)
 ![Alt text](https://github.com/AlemayehuMekonen/Network-everything/blob/master/Final%20Project/Final%20Project%20Documentation/Pictures%20of%20the%20electronics/topview.jpg)
 
 ![Alt text](https://github.com/AlemayehuMekonen/Network-everything/blob/master/Final%20Project/Final%20Project%20Documentation/Pictures%20of%20the%20electronics/Full%20view.jpg)
+
+![Alt text](https://github.com/AlemayehuMekonen/Network-everything/blob/master/Final%20Project/Final%20Project%20Documentation/Pictures%20of%20the%20electronics/Glove2.jpg)
